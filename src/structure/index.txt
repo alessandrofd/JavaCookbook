@@ -1,0 +1,112 @@
+7.1. Using Arrays for Data Structuring
+    Array1.java
+
+7.2. Resizing an Array
+    Array2.java
+
+7.3. The Collections Framework
+    Problem: You're having trouble keeping track of all these lists, sets, and iterators.
+    Solution: There's a pattern to it.
+    Source Code: none
+
+7.4. Like an Array, but More Dynamic
+    Problem: You don't want to worry about storage allocation; you want a standard class to handle it for you.
+    Solution: Use an ArrayList.
+    Source Code: ArrayListDemo.java
+
+7.5. Using Generic Collections
+    Problem: You want to store your data in one of the Collections classes defined in Chapter 7 with type safety, and
+        without having to write downcasts when retrieving data from the collection.
+    Solution: Use Java's Generic Types mechanism, and declare the Collections with a "type parameter" of the correct
+        type.  The type parameter name appears in angle brackets after the declaration and instantiation. For example,
+        to declare an ArrayList for holding String object references: List<String> myList = new ArrayList<String>();
+    Source Code: ArrayListGenericDemo.java
+
+7.6. Avoid Casting by Using Generics
+    Problem: You wish to define you own container class using the Generic Type mechanism to avoid needless casting.
+    Solution: Define a class using <TypeName> where the container type is declared, and TypeName where it is used.
+    Source Code: MyStack.java, MyStackDemo.java
+
+7.7. How Shall I Iterate Thee: Let Me Enumerate The Ways
+    Problem: You need to iterate over some structured data.
+    Solution: Java provides many ways to iterate over collections of data. In order newest first:
+        1. Iterable.forEach method (Java 8)
+        2. Java "foreach" loop (Java 5)
+        3. java.util.Iterator (Java 2)
+        4. three-part for loop
+        5. "while" loop
+        6. Enumeration
+    Source Code: IterableForEach.java
+
+7.8. Eschewing Duplicates with a Set
+    Problem: You want a structure which will avoid storing duplicates.
+    Solution: Use a Set implementations instead of a List, e.g., Set<String> myNames = new HashSet<>()
+    Source Code: SetDemo.java
+
+7.9. Using Iterators or Enumerations for Data-Independent Access
+    Problem: You want to write your code so that users don't have to know whether you store it in an array, a Vector,
+        an ArrayList, o even a doubly linked list of your own choosing.
+    Solution: Use the Iterator interface.
+    Source Code: IteratorDemo.java
+
+7.10. Structuring Data in a Linked List
+    Problem: Your data isn't suitable for use in an array.
+    Solution: Write your own data structure(s).
+    Source Code: LinkedListDemo.java, LinkList.java
+
+7.11. Mapping with Hashtable and HashMap
+    Problem: You need a one-way mapping from one data item to another.
+    Solution: Use a HashMap ou the older Hashtable.
+    Source Code: HashMapDemo.java
+
+7.12. Storing Strings in Properties and Preferences
+    Problem: You need to store keys and values that are both strings, possibly with persistence across runs of a
+        program - for example, program customization.
+    Solution: Use a java.util.prefs.Preferences object or a java.util.Properties object.
+    Source Code: PrefsDemo.java, PropsCompanies.java, FileProperties.java
+
+7.13. Sorting a Collection
+    Problem: You put your data into a collection in random order or used a Properties object that doesn't preserve the
+        order, and now you want it sorted.
+    Solution: Use the static method Arrays.sort() or Collections.sort(), optionally providing a Comparator.
+    Source Code: SortArray.java, SubstringComparator.java, SubstrCompDemo.java
+
+7.14. Avoiding the Urge to Sort
+    Problem: Your data needs to be sorted, but you don't want to stop and sort it periodically.
+    Solution: Not everything that requires order requires an explicit sort operation. Just keep the data sorted at all
+        times.
+    Source Code: TreeSetDemo.java
+
+7.15. Finding an Object in a Collection
+    Problem: You need to see whether a given collection contains a particular value.
+    Solution: Ask the collection if it contains an object of the given value.
+    Source Code: ArrayHunt.java
+
+7.16. Converting a Collection to an Array
+    Problem: You have a Collection but you need a Java language array
+    Solution: Use the Collection method toArray().
+    Source Code: ToArray.java
+
+7.17. Rolling Your Own Iterator
+    Problem: You have your own data structure, but you want to publish the data as an Iterator to provide generic access
+        to it.
+    Solution: Write your own Iterator. Just implement (or provide an inner class that implements) the Iterator
+        (or Enumeration) interface. For extra points, implement Iterable and your objects can be iterated with a
+        "foreach" loop.
+    Source Code: ArrayIterator.java, ArrayIteratorDemo.java
+
+7.18. Stack
+    Problem: You need to process data in "last in first out" (LIFO) or "most recently added" order.
+    Solution: Write your own code for creating a stack; it's easy. Or, use a java.util.Stack.
+    Source Code: ToyStack.java ToyStack2.java SimpleStack.java
+
+7.19. Multidimensional Structures
+    Problem: You need a two-, three-, or more dimensional array or ArrayList.
+    Solution: No problem. Java supports this.
+    Source Code: ArrayTwoDObjects.java
+
+7.20. Program: Timing Comparisons
+    Source Code: Array.java, ArrayLst.java, MutableInteger.java
+
+** Extra
+    StructureDemo.java

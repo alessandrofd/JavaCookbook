@@ -1,0 +1,33 @@
+10.22. Reading and Writing JAR or Zip Archives
+    Problem: You need to create and/or extract from a JAR file or a file in a well-known Zip Archive format, as
+        established by PkZip and used by Unix zip/unzip and WinZip.
+    Solution: You could use the jar program in the Java Development Kit since its file format is identical to the zip
+        format with the addition of the META-INF directory to contain additional structural information. But since this
+        is a book about programming, you are probably more interested in the ZipFile and ZipEntry classes that they
+        provide access to.
+    Source Code: UnZip.java
+
+10.23. Finding Files in a Filesystem-Neutral Way with getResource and getResourceAsStream()
+    Problem: You want to load objects or files without referring to their absolute location in the filesystem. This can
+        be because you are in a server (Java EE) environment, or just because you want to be independent of file paths,
+        or because you expect users to deploy the resource on "somewhere" on classpath (possibly even inside a JAR file).
+    Solution: Use getClass() or getClassLoader() and either getResource() or getResourceAsStream().
+
+10.24. Reading and Writing Compressed Files
+    Problem: You need to read or write files that have been compressed using GNU zip, or gzip. These files are usually
+        saved with the extension .gz.
+    Solution: Use GZipInputStream or GZipOutputStream as appropriate.
+    Source Code: ReadGZIP.java
+
+10.26. Save User Data to Disk
+    Problem: You need to save user data to disk in a Java application. This may be in response to "File -> Save" in a
+        GUI application, saving the file in a text editor, or saving configuration data in a non-gui application. You
+        have heard (correctly) that a well-behaved application should never lose data.
+    Solution: Use this five step plan, with appropriate variations:
+        1. Create a temporary file; set it to deleteOnExit(true)
+        2. Write the user data to this file. Data format translation errors if any will be thrown during this process,
+            leaving the user's data intact.
+        3. Delete the backup file if it exists.
+        4. Rename the user's previous file to *.bak.
+        5. Rename the temporary file to the save file.
+    Source Code: FileSaver.java, FileSaverDemo.java

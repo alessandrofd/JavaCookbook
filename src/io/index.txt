@@ -1,0 +1,215 @@
+Chapter 10 - Input and Output
+
+10.0. Introduction
+
+Most programs need to interact with the outside world, and one common way of doing so is by reading and writing files.
+Files are normally on some persistent medium such as a disk drive, and, for the most part, we shall happily ignore the
+differences between files on a hard disk (and all operating system-dependent filesystem types), a USB drive or SD card,
+a DVD-ROM, and others. For now, they're just files. And, like most other languages and OSes, Java extends the "reading
+and writing" model to network (socket) communications, which we'll touch in Chapter 15 and Chapter 16.
+
+This chapter covers all the normal input/output operations such as opening/closing and reading/writing. Files are
+assumed to reside on some kind of file store or permanent storage. Distributed filesystems such as Sun's Network File
+System (NFS, common on Unix and available for Windows), SMB (Windows network filesystem, available form Unix via the
+open-source Samba program), and FUSE (Filesystem in User SpacE, implementations for most Unix/Linux systems) are assumed
+to work "just like" disk filesystems, except when noted.
+
+The Formatter and Scanner classes provide formatting and scanning, of course. Formatter allows many formatting tasks to
+be performed either into a String or to almost any output destination. Scanner parses many kinds of objects, again
+either from a String or from almost any input source. These are new and very powerful; each is given its own recipe in
+this chapter.
+
+Finally, this chapter provides basic coverage of the moribund Java Communications API, designed to read and write on
+serial and parallel ports. Previous editions of this book contained full coverage of this API, but it is little uses
+now, and even less maintained.
+
+Stream and Readers/Writers
+
+Java provides two sets of classes for reading and writing. The Stream section of package java.io is for reading or
+writing bytes of data. Older languages tented to assume that a byte (which is a machine-specific collection of bits,
+usually eight bits on modern computers) is exactly the same thins as a "character" - a letter, digit, or other
+linguistic element. However, Java is designed to be used internationally, and eight bits is simply not enough to handle
+the many different character sets used around the world. Script-based languages like Arabic and Indian languages, and
+pictographic languages like Chinese and Japanese, each have many more than 256 characters, the maximum that can be
+represented in an eight-bit byte. The unification of these many character code sets is called, not surprisingly,
+Unicode. Both Java and XML use Unicode as their character sets, allowing you to read and write text in any of these
+human languages. But you should use Readers and Writers, not Streams, for textual data.
+
+Unicode itself doesn't solve the entire problem. Many of these human languages were used on computers long before
+Unicode was invented, and they didn't all pick the same representation as Unicode. And they all have zillions of files
+encoded in a particular representation that isn't Unicode. So conversion routines are needed when reading and writing
+to convert between Unicode String objects used inside the Java machine and the particular external representation that
+a user's files are written in. These converters are packaged inside a powerful set of classes called Readers and
+Writers. Readers and Writers should always be used instead of InputStream and OutputStream when you want to deal with
+characters instead of bytes. We'll see more on this conversion, and how to specify which conversion, a little later on
+this chapter.
+
+See Also
+
+One topic "not" addressed in depth here in the Java "New IO" package (a poor choice of name: it was "new" in Java SE
+1.4). NIO is more complex to use, and the benefits accrue primarily in large-scale server-side processing. Recipe 4-5
+provides one example of using NIO.
+
+Another issue not addressed here is hardcopy printing. Java's scheme for printing onto paper uses the same graphics
+model as is used in AWT, the basic Window System package. For this reason, I defer discussion of printing to Chapter 12.
+
+Another topic not covered here is that of having the read or write to occur concurrently with other program activity.
+This requires the use of threads, or multiple flows of control within a single program. Threaded I/O is a necessity in
+many programs: those reading from slow devices such as tape drives, those reading from or writing to network
+connections, and those with a GUI. For this reason the topic is give considerable attention, in the context of
+multithreaded applications, in Chapter 22.
+
+
+10.1. Reading Standard Input
+    Problem: You really do need to read from the standard input, or console. One reason is that simple test programs are
+        often console-driven. Another is that some programs naturally require a lot of interaction with the user and you
+        want something faster than a GUI (consider an interactive mathematics or statistical exploration program). Yet
+        another is piping the output of one program into the input of another, a very common operation among Unix users
+        and quite valuable on other platforms, such as Windows, that support this kind of operation.
+    Solution: To read bytes wrap BufferedInputStream() around System.in. For the more common case of reading text, use an
+        InputStreamReader and BufferedReader.
+    Source Code: CatStdin.java, ReadStdinInt.java, ReadStdinInt15.java
+
+10.2. Reading from the Console or Controlling Terminal; Reading Passwords without Echoing
+    Problem: You want to read directly from your program's controlling terminal or console terminal.
+    Solution: Use Java 6 System.console() method to obtain a Console object, and use its methods.
+    Source Code: ConsoleRead.java, ReadPassword.java
+
+10.3. Writing Standard Output or Standard Error
+    Problem: You want your program to write to the standard output or the standard error stream.
+    Solution: Use System.out or System.err as appropriate.
+    Source Code: PrintStandardOutput.java
+
+10.4. Printing with Formatter and printf
+    Problem: You want the ease of use java.util.Formatter class brings to simple printing tasks.
+    Solution: Use Formatter for printing values with fine-grained control over formatting.
+    Source Code: FormatterDemo.java, FormatterDates.java (bonus lang.VarArgsDemo.java)
+
+10.5. Scanning Input with StreamTokenizer
+    Problem: You need to scan a file with more fine-grained resolution than the readline() method of the BufferedReader
+        class and its subclasses (discussed in the Recipe 10.16).
+    Solution: Use a StreamTokenizer, readline(), and a StringTokenizer; the Scanner class (see the Recipe 10.6); regular
+        expressions (Chapter 4); or one of several third-party "parser generator" tools.
+    Source Code: ReadCharsOneAtATime.java, ScanStringTok.java, ScanStreamTok.java, SimpleCalcStreamTok.java
+
+10.6. Scanning Input with the Scanner Class
+    Problem: You want the ease of use the Java.util.Scanner class brings to simple reading tasks.
+    Solution: Use Scanner's next() methods for reading.
+    Source Code: SimpleCalcScanner.java
+
+10.7. Scanning Input with Grammatical Structure
+    Problem: You need to parse a file whose structure can be described as "grammatical" in the sense of computer languages,
+        not natural languages.
+    Solution: Use one of many parser generators.
+
+10.8. Opening a File by Name
+    Problem: The Java Documentation doesn't have methods for opening files. How do I connect a filename on disk with a
+        Reader, Writer, or Stream?
+    Solution: Construct a FileReader, FileWriter, FileInputStream, or FileOutputStream.
+    Source Code: OpenFileByName.java
+
+10.9. Copying a File
+    Problem: You need to copy a file in its entirety.
+    Solution: Use a pair of Streams for binary data, or a Reader and a Writer for text, and a while loop to copy until
+        end-of-file is reached on the input.
+    Source Code: FileIO.java, FileIODemo.java
+
+10.10. Reading a File into a String
+    Problem: You need to read the entire contents of a file into a string.
+    Solution: Use my FileIO.readerToString() method.
+    Source Code: FileIO.java, FileIODemo.java
+
+10.11. Reassigning the Standard Streams
+    Problem: You need to reassign one or more of the standard streams System.in, System.out, or System.err
+    Solution: Construct an InputStream or PrintStream as appropriate, and pass it to the appropriate set method in the
+        System class.
+
+10.12. Duplicating a Stream as It Is Written
+    Problem: You want anything written to a stream, such as the standard output System.out, or the standard error
+        System.err, to apperar there but also be logged into a file.
+    Solution: Subclass PrintStream and have its write() methods write to two streams. Then use System.setErr() or
+        setOut(), as in Recipe 10.11, to replace the existing standard stream with this "tee" PrintStream class.
+    Source Code: TeePrintStream.java, TeePrintStreamDemo.java
+
+10.13. Reading/Writing s Different Character Set
+    Problem: You need to read or write a text file using a particular encoding.
+    Solution: Convert the text to or from internal Unicode by specifying a converter when you construct an
+        InputStreamReader or PrintWriter.
+    Source Code: UseConverters.java
+
+10.14. Those Pesky End-of-Line Characters
+    Problem: You really want to know about end-of-line characters.
+    Solution: Use \r and \n in whatever combination makes sense.
+
+10.15. Beware Platform-Dependent File Code
+    Problem: Chastened by the previous recipe, you now wish to write only platform-independent code.
+    Solution: Use readLine() ane println(). Never use \n by itself; use File.Separator if you must.
+
+10.16. Read "Continued" Lines
+    Problem: You need to read lines that are continued with backslashes (\) or that are continued with leading spaces
+        (such as email or news headers).
+    Solution: Use my IndentContLineReader or EscapeContLineReader classes
+    Source Code: ContLineReader.java, EscapeContLineReader.java, IndentContLineReader.java, EscapeContLineReaderTest.java,
+        IndentContLineReader.java
+
+10.17. Reading/Writing Binary Data
+    Problem: You need to read or write binary data, as opposed to text.
+    Solution: Use a DataInputStream ou DataOutputStream
+    Source Code: WriteBinary.java
+
+10.18. Seeking
+    Problem: You need to read from or write to a particular location in a file, such as an indexed file.
+    Solution: Use a RandomAccessFile.
+    Source Code: ReadRandom.java
+
+10.19. Writing Data Streams from C
+    Problem: You need to exchange binary data between C and Java.
+    Solution: In your C code, use the network byte-ordering macros.
+
+10.20. Saving and Restoring Java Objects
+    Problem: You need to write and (later) read objects.
+    Solution: Use the object stream classes, ObjectInputStream, and ObjectOutputStream.
+    Source Code: MyData.java, SerialDemoAbstractBase.java, SerialDemoObjectStream.java
+
+10.21. Preventing ClassCastExceptions with SerialVersionUID
+    Problem: Your classes were recompiled, and you're getting ClassCastExceptions that you shouldn't.
+    Solution: Run serialver to generate a "serial version UUID" and paste its output into your classes before you start.
+        Or use your IDE's tools for this purpose.
+    Souce Code: SerializableUser.java
+
+10.22. Reading and Writing JAR or Zip Archives
+    Problem: You need to create and/or extract from a JAR file or a file in a well-known Zip Archive format, as
+        established by PkZip and used by Unix zip/unzip and WinZip.
+    Solution: You could use the jar program in the Java Development Kit since its file format is identical to the zip
+        format with the addition of the META-INF directory to contain additional structural information. But since this
+        is a book about programming, you are probably more interested in the ZipFile and ZipEntry classes that they
+        provide access to.
+    Source Code: UnZip.java
+
+10.23. Finding Files in a Filesystem-Neutral Way with getResource and getResourceAsStream()
+    Problem: You want to load objects or files without referring to their absolute location in the filesystem. This can
+        be because you are in a server (Java EE) environment, or just because you want to be independent of file paths,
+        or because you expect users to deploy the resource on "somewhere" on classpath (possibly even inside a JAR file).
+    Solution: Use getClass() or getClassLoader() and either getResource() or getResourceAsStream().
+
+10.24. Reading and Writing Compressed Files
+    Problem: You need to read or write files that have been compressed using GNU zip, or gzip. These files are usually
+        saved with the extension .gz.
+    Solution: Use GZipInputStream or GZipOutputStream as appropriate.
+    Source Code: ReadGZIP.java
+
+10.26. Save User Data to Disk
+    Problem: You need to save user data to disk in a Java application. This may be in response to "File -> Save" in a
+        GUI application, saving the file in a text editor, or saving configuration data in a non-gui application. You
+        have heard (correctly) that a well-behaved application should never lose data.
+    Solution: Use this five step plan, with appropriate variations:
+        1. Create a temporary file; set it to deleteOnExit(true)
+        2. Write the user data to this file. Data format translation errors if any will be thrown during this process,
+            leaving the user's data intact.
+        3. Delete the backup file if it exists.
+        4. Rename the user's previous file to *.bak.
+        5. Rename the temporary file to the save file.
+    Source Code: FileSaver.java, FileSaverDemo.java
+
+10.27. Program: Text to PostScript
+    Source Code: textproc/PSFormatter.java

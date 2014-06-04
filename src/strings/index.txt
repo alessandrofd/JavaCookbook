@@ -1,0 +1,4 @@
+3.1. Taking Strings Apart with Substrings
+    Problem: You want to break a string apart into substrings by position.
+    Solution: Use the String object's substring() method.
+    Source Code: SubStringDemo.java

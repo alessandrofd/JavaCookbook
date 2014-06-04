@@ -1,0 +1,1 @@
+The Files class contains an array of methods for dealing with file paths including copying, moving, and deleting.

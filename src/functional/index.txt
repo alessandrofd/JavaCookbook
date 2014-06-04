@@ -1,0 +1,37 @@
+9.1. Using Lambdas/Closures Instead of Inner Classes
+    Problem: You want to avoid all the typing that even the anonymous style of inner class requires.
+    Solution: Use Java's Lambda Expressions
+    Source Code: Camera.java, CameraMake.java, CameraType.java, CameraSensor.java, CameraAcceptor.java,
+        CameraUtils.java, CameraSearchCameraAcceptor.java
+
+9.2. Using Lambda Pre-Defined Interfaces Instead of Your Own
+    Problem: You want to use existing interfaces instead of defining your own, for use with Lambdas.
+    Solution: Use the Java 8 Functional interfaces from java.util.function.
+    Source Code: CameraSearchPredicate.java
+
+9.3. Simplifying Processing with Streams
+    Problem: You want to process some data through a pipeline-like mechanism.
+    Solution: Use a Stream class and its operators.
+    Source Code: SimpleStreamDemo.java
+
+9.4. Improving Throughput with Parallel Streams and Collections
+    Problem: You want to combine Streams with parallelism, and still be able to use the non-thread-safe Collections API.
+    Solution: Use a Parallel Stream.
+    Source Code: CameraSearchParallelStream.java
+
+9.5. Creating Your Own Functional Interfaces
+    Problem: You want to create functional interfaces for use within Lambda expressions.
+    Solution: Create an interface with one abstract method; optionally annotate it with @FunctionalInterface.
+    Source Code: ProcessIntsUsingFunctional.java, ProcessIntsFunctional.java, ProcessIntsIntUnaryOperator.java
+
+9.6. Using Existing Code as Functional with Method References
+    Problem: You have existing code that matches a functional interface and you want to use it withou renaming methods
+        to match the interface name.
+    Solution: Use function references such as MyClass::myFunc or someObj::someFunc.
+    Source Code: ReferencesDemo.java, ReferencesDemo2.java, ReferencesDemo3.java, ReferencesDemo4.java
+
+9.7. Java Mixins - Mixing In Methods
+    Problem: You've heard about "mixins" and want to apply them in Java.
+    Solution: Use static import. Or, declare one or more functional interfaces with a "default" method containing the
+        code to execute, and simply implement it.
+    Source Code: MixinsDemo.java

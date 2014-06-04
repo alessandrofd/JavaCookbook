@@ -1,0 +1,64 @@
+5.1. Checking Whether a String is a Valid Number
+    GetNumber.java
+5.2. Storing a Larger Number in a Smaller Number
+    CastNeeded.java
+5.3. Converting Numbers to Objects and Vice Versa
+    AutoboxDemo.java
+    IntObject.java
+5.4. Taking a Fraction of an Integer Without Using Floating Point
+    FractMult.java
+5.5. Insuring the Accuracy of Floating-Point Numbers
+    InfNaN.java
+    Heron.java
+5.6. Comparing Floating-Point Numbers
+    FloatCmp.java
+5.7. Rounding Floating-Point Numbers
+    Round.java
+5.8. Formatting Numbers
+    NumFormat2.java
+    NumFormatDemo.java
+5.9. Converting Between Binary, Octal, Decimal, and Hexadecimal
+    IntegerBinOctHexEtc.java
+5.10. Operating on a Series of Integers
+    NumSeries.java
+5.11. Working with Roman Numerals
+    RomanNumberFormat.java
+    RomanNumbersSimple.java (Requires Java 8)
+    RomanNumbersDemo.java
+    RomanYear.java
+*** Extra
+    ScaledNumberFormat.java
+    ScaledNumberFormatSimple.java
+5.12. Formatting with Correct Plurals
+   FormatPlurals.java
+   FormatPluralsChoice.java
+5.13. Generating Random Numbers
+    Random1.java
+    RandomInt.java
+    Random2.java
+    Random3.java
+    Random4.java
+5.14. Calculating Trigonometric Functions
+    Trig.java
+5.15. Taking Logarithms
+    Logarithm.java
+    LogBase.java
+    LogBaseUse.java
+5.16. Multiplying Matrices
+    Matrix.java
+    MatrixUse.java
+5.17. Using Complex Numbers
+    Complex.java
+    ComplexDemo.java
+5.18. Handling Very Large Numbers
+    BigNumCalc.java
+5.19. Program: TempConverter
+    TempConverter.java
+    TempConverter2.java
+5.20. Program: Number Palindromes
+    Palindrome.java
+    PalindromeFirst.java
+    PalindromeBig.java
+
+
+

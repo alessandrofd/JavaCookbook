@@ -1,0 +1,79 @@
+Chapter 11 - Directory and Filesystem Operations
+
+11.0. Introduction
+
+This chapter is largely devoted to one class: java.io.File. The File class gives you the ability to list directories,
+obtain file status, rename and delete files on disk, create directories, and perform other filesystem operations. Many
+of these would be considered "system programming" functions on some operating systems; Java makes them all as portable
+as possible.
+
+Note that many of the methods of this class attempt to modify the permanent file store, or disk filesystem, of the
+computer you run them on. Naturally, you might not have permission to change certain files in certain ways. This can be
+detected by the Java Virtual Machine's (or the browser's, in an applet) SecurityManager, which will throw an instance
+of the unchecked exception SecurityException. But failure can also be detected by the underlying operating system: if
+the security manager approves it, but the user running your program lacks permissions on the directory, for example,
+you will either get back an indication (such as false) or an instance of the checked exception IOException. This must
+be caught (or declared in the throws clause) in any code that calls any method that tries to change the filesystem.
+
+Java 7 introduced a potential replacement for File, called Path, which we shall also investigate.
+
+11.1. Getting File Information
+    Problem: You need to know all you can about a given file on disk.
+    Solution: Use a java.io.File object.
+    Source Code: FileStatus.java
+
+11.2. Creating a File
+    Problem: You need to create a new file on disk, but you don't want to write into it.
+    Solution: Use a java.io.File object's createNewFile() method.
+    Source Code: Creat.java
+
+11.3. Renaming a File
+    Problem: You need to change a file's name on disk.
+    Solution: Use a java.io.File object's renameTo() method.
+    Source Code: Rename.java
+
+11.4. Deleting a File
+    Problem: You need to delete one or more files from the disk.
+    Solution: Use a java.io.File object's delete() method; it deletes files (subject to permissions) and directories
+        (subject to permissions and to the directory being empty).
+    Source Code: Delete.java, Delete2.java
+
+11.5. Creating a Transient File
+    Problem: You need to create a file with a unique temporary filename, or, arrange for a file to be deleted when your
+        program is finished.
+    Solution: Use a java.io.File object's  createTempFile() or deleteOnExit() method.
+
+11.6. Changing File Attributes
+    Problem: You want to change attributes of a file other than its name.
+    Solution: Use setReadOnly() or setLastModified().
+    Source Code: ReadOnly.java
+
+11.7. Listing a Directory
+    Problem: You need to list the filesystem entries named in a directory.
+    Solution: Use a java.io.File object's list() or listFiles() method.
+    Source Code: Ls.java, FNFilter.java, FNFilter2.java
+
+11.8. Getting the Directory Roots
+    Problem: You want to know about the top-level directories, such as C:\ and D:\ on Windows.
+    Solution: Use the static method File.listRoots().
+    Source Code: ListRoots.java
+
+11.9. Creating New Directories
+    Problem: You need to create a directory.
+    Solution: Use java.io.File's mkdir() or mkdirs() methods.
+    Source Code: MkDirExamples.java
+
+11.10. Using Path instead of File
+    Problem: You need more capability than the standard File class. You need to move, copy, delete, and otherwise work on
+        files with a minimum of coding.
+    Solution: Consider using the Path class, an intended replacement for File, and the Files class.
+    Source Code: PathsFilesDemo.java
+
+11.11. Using the FileWatchService to get notified about File Changes
+    Problem: You want to be notified when some other application updates one or more of the files you are interested in.
+    Solution: Use the Java 7 FileWatchService to get notified of changes to files automatically, instead of having to
+        examine the files periodically.
+    Source Code: nio/FileWatchServiceDemo.java
+
+11.12. Program: Find
+    Source Code: Find.java

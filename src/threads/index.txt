@@ -1,0 +1,59 @@
+22.1. Running Code in a Different Thread
+    Problem: You need to write a threaded application.
+    Solution: Write code that implements Runnable; instantiate and start it.
+    Source Code: ThreadsDemo1.java, ThreadsDemo2.java, ThreadsDemo3.java, threads.ThreadsDemo4.java
+
+22.2. Displaying a Moving Image with Animation
+    Problem: You need to update a graphical display while other parts of the program are running.
+    Solution: Use a background thread to drive the animation.
+    ***Source Code: Sprite.java, Bounce.java (still don't know how to deploy applets)
+
+22.3. Stopping a Thread
+    Problem: You need to stop a thread.
+    Solution: Don't use Thread.stop() method; instead, use a boolean tested at the top of the main loop in the run()
+        method.
+    Source Code: StopBoolean.java, StopClose.java, Intr.java
+
+22.4. Rendezvous and Timeouts
+    Problem: You need to know whether something finished or whether it finished in a certain length of time.
+    Solution: Start that "something" in its own thread and call its join() method with or without a timeout value.
+    Source Code: Join.java
+
+22.5. Synchronizing Threads with the synchronized Keyword
+    Problem: You need to protect certain data from access by multiple threads.
+    Solution: Use the synchronized keyword on the method or code you wish to protect.
+    ***Source Code: BuzzInServlet.java (depends on Java EE, have to upgrade IDE)
+
+22.6. Simplifying Synchronization with Locks
+    Problem: You want easier means of synchronizing threads.
+    Solution: Use the lock mechanism in java.util.concurrent.locks
+    Source Code: ReadersWriteDemo.java, BallotBox.java, BallotPosition.java
+
+22.7. Synchronizing Threads with wait() and notifyAll()
+    Problem: The synchronized keyword lets you lock out multiple threads but doesn't give you much communication between
+        them.
+    Solution: Use wait() and notifyAll(). Very carefully.
+    Source Code: ProdCons1.java, ProdCons2.java
+
+22.8. Simplifying Producer-Consumer with the Queue Interface
+    Problem: You need to control producer-consumer implementations involving multiple threads.
+    Solution: Use the Queue interface or the BlockingQueue subinterface.
+    Source Code:ProdCons15.java
+
+22.9. Optimizing Parallel Processing with Fork/Join
+    Problem: You want to to optimize use of multiple processors and/or large problem spaces.
+    Solution: Use the fork/join framework.
+    Source Code: RecursiveActionDemo.java, RecursiveTaskDemo
+
+22.10. Background Saving in an Editor
+    Problem: You need to save the user's work periodically in an interactive program.
+    Solution: Use a background thread.
+    Source Code: AutoSave.java
+
+22.11. Program: Threaded Network Server
+    Source Code: Httpd.java, Handler.java
+
+22.12. Simplifying Servers Using the Concurrency Utilities
+    Problem: You need to implement a multithreaded server
+    Solution: Use a ThreadPool implementation of the Executor interface.
+    Source Code: HttpdConcurrent.java

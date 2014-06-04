@@ -1,0 +1,69 @@
+8.1. Formatting Objects for Printing with toString()
+    Problem: You want your objects to have a useful default format.
+    Solution: Override the toString() method inherited form java.lang.Object.
+    Source Code: ToStringWithout.java, ToStringWith.java
+
+8.2. Overriding the equals() and hashCode() Methods.
+    Problem: You want to be able to compare objects of your class and/or use these objects reliably in Maps and other
+        Collections.
+    Solution: Outfit your class with an equals() and hashCode() method.
+    Source Code: EqualsDemo.java, PrintHashCodes.java, CopyConstructorDemo.java
+
+8.3. Using ShutdownHooks for Application Cleanup
+    Problem: You want some cleanup performed when your application shuts down.
+    Solution: Use shutdownhook.
+    Source Code: ShutdownDemo.java
+
+8.4. Using Inner Classes
+    Problem: You need to write a private class, or a class to be used in one other class at most.
+    Solution: Use a nonpublic class or an inner class.
+    Source Code: AllClasses.java
+
+8.5. Providing Callbacks via Interfaces
+    Problem: You want to provide callbacks, that is, have unrelated classes call back into you code.
+    Solution: One way is to use a Java interface.
+    Source Code: interfaces/Asset.java, PowerSwitchable.java, BuildingAsset.java, BuildingLight.java, EmergencyLight.java,
+        RoomLights.java, ComputerAsset.java, ComputerCPU.java, ComputerMonitor.java, BuildingManagement.java
+
+8.6. Polymorphism/Abstract Methods
+    Problem: You want each of a number of subclasses to provide its own version of one or more methods.
+    Solution: Make the method abstract in the parent class; this makes the compiler ensure that each subclass implements
+        it.
+    Source Code: shapes/Shape.java, Rectangle.java, Circle.java, ShapeDriver.java
+
+8.7. Passing Values
+    Problem: You need to pass a number like an int to a routine and get back the routine's updated version of that value
+        in addition to the routine's return value.
+
+        This often comes up in working with strings; the routine may need to return a boolean, say, or the number of
+        characters transferred, but also needs to increment an integer array or string index in the calling class.
+
+        It is also useful in constructors, which cannot return a value but may need to indicate that they have "consumed"
+        or processed a certain number of characters from within a string, such as when the string will be further
+        processed in a subsequent call.
+    Solution: Use a specialized class such as MutableInteger presented here.
+    Source Code: MutableInteger.java, StringParse.java
+
+8.8. Using Typesafe Enumerations
+    Problem: You need to manage a small number of discrete values within a program.
+    Solution: Use the Java enum mechanism.
+    Source Code: Media.java, Product.java, MediaFancy.java, EnumList.java
+
+8.9. Enforcing the Singleton Pattern
+    Problem: You want to be sure there is only one instance of your class in a given Java Virtual Machine.
+    Solution: Make your class enforce the Singleton pattern, primarily by having only a private constructor.
+    Source Code: Singleton.java
+
+8.10. Roll Your Own Exceptions
+    Problem: You'd like to use an application-specific exception class or two.
+    Solution: Go ahead and subclass Exception or RuntimeException.
+    Source Code: ChessMoveException.java
+
+8.11. Using Dependency Injection
+    Problem: You want to avoid excessive coupling between classes, and, you want to avoid excessive code dedicated to
+        object creation/lookup.
+    Solution: Use a Dependency Injection Framework.
+    Source Code: Dentro do package "di". Precisa do Spring para rodar - postergado
+
+8.12. Program: Plotter
+    Source Code: ../plotter/Plotter.java PlotDriver.java
